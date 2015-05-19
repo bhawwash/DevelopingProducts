@@ -16,15 +16,26 @@ shinyUI(fluidPage(
                                   "Lloyd" = "Lloyd",
                                   "MacQueen" = "MacQueen"),selected = "Lloyd"),
       selectInput("xaxis", label = h4("X-Axis"), 
-                  choices = list("Sepal Length" = "Sepal.Length",
-                                 "Sepal Width" = "Sepal.Width",
-                                 "Petal Length" = "Petal.Length",
-                                "Petal Width"="Petal.Width"),selected = "Sepal.Length"),
+                  choices = list("Miles/Gallon" = "mpg",
+                                 "Displacement" = "disp",
+                                 "Horse Power" = "hp",
+                                 "Weight"="wt"),selected = "mpg"),
       selectInput("yaxis", label = h4("Y-Axis"), 
-                  choices = list("Sepal Length" = "Sepal.Length",
-                                 "Sepal Width" = "Sepal.Width",
-                                 "Petal Length" = "Petal.Length",
-                                 "Petal Width"="Petal.Width"),selected = "Sepal.Width")
+                  choices = list("Miles/Gallon" = "mpg",
+                                 "Displacement" = "disp",
+                                 "Horse Power" = "hp",
+                                 "Weight"="wt"),selected = "disp")
+      
+      #selectInput("xaxis", label = h4("X-Axis"), 
+      #            choices = list("Sepal Length" = "Sepal.Length",
+      #                           "Sepal Width" = "Sepal.Width",
+      #                           "Petal Length" = "Petal.Length",
+      #                          "Petal Width"="Petal.Width"),selected = "Sepal.Length"),
+      #selectInput("yaxis", label = h4("Y-Axis"), 
+      #            choices = list("Sepal Length" = "Sepal.Length",
+      #                           "Sepal Width" = "Sepal.Width",
+      #                           "Petal Length" = "Petal.Length",
+      #                           "Petal Width"="Petal.Width"),selected = "Sepal.Width")
     ),
     
     # Show a plot of the generated distribution

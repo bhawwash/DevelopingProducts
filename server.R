@@ -5,10 +5,13 @@ library(fpc)
 # Define server logic required to draw a histogram
 shinyServer(function(input, output) {
   
+  dat<-mtcars[,c(1,3,4,6,9)]
+  TrueLabel<-dat$am
+  dat$am<-NULL
   
-  dat<-iris
-  TrueLabel<-dat$Species
-  dat$Species<-NULL
+  #dat<-iris
+  #TrueLabel<-dat$Species
+  #dat$Species<-NULL
 
   output$outPlot <- renderPlot({
     model <<-kmeans(dat,centers=input$k,algorithm=input$alg)   
@@ -32,8 +35,9 @@ shinyServer(function(input, output) {
   })
   
   output$validPlot<- renderPlot({
+    RSS=model$betweenss / model$totss  
     result = cluster.stats(dist(dat[,1:4]),model$cluster,silhouette=T,sepindex=T,alt.clustering=as.integer(TrueLabel)*input$k)
-    result = as.data.frame(cbind(c(result$corrected.rand,result$avg.silwidth,result$sindex),c("Rand","Silhouette","Seperation Index")))
+    result = as.data.frame(cbind(c(result$corrected.rand,result$avg.silwidth,RSS),c("Rand","Silhouette","Sum Squared Errors")))
     result$V1 = as.numeric(as.character(result$V1))
     
     ggplot(data=result,aes(x=V2,y=V1,fill=V2))+geom_bar(stat="identity")+ylim(0,1)+ylab("")+xlab("")+theme(legend.position="none")
